@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[a4paper, total={18cm, 24cm}]{geometry}
+\usepackage[magyar]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{t1enc}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{gensymb}
+
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+\title{KisFiz 2 gyakorlat házi}
+\author{Pongó Tivadar}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\section{Szolenoid tengelyén a mágneses indukció}
+\subsection{Analitikusan levezetett képlet}
+$\displaystyle B = -\frac{\mu_0 N I}{2l} \left( \frac{z - \frac{l}{2}}{\sqrt{R^2 + \left( z - \frac{l}{2} \right)^2 }} - \frac{z + \frac{l}{2}}{\sqrt{R^2 + \left( z + \frac{l}{2} \right)^2 }} \right) $
+\newline \newline
+A számolás alapja az, hogy felbontjuk a szolenoidot kis $dz$ szélességű körgyűrűkre és ezt felintegráljuk $ z + \frac{l}{2} $-től $z - \frac{l}{2}$-ig, ahol $z$ a szolenoid közepétől való távolság. A körgyűrű tengelyén a B távolságfüggését már előzőleg kiszámoltuk Biot-Savart törvény alapján.
+\newline \newline
+$\mu_0$-lal egyik eseteben sem szoroztam be!!!
+
+\subsection{Egy bizonyos szolenoid tere}
+Tekercs menetszáma: $N = 20$ \\
+Tekercs hossza: $10.0 \, m$ \\
+Tekercs sugara: $1 \, m$ \\
+Áramerősség: $1 \, A$
+\newline \newline
+Az adatok az excel is fájlban (N20.xlsx) láthatók. \\
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+z            & 0      & 0,5     & 1       & 1,5     & 2       & 2,5     & 3       & 3,5     & 4       & 4,5     \\ \hline
+B analitikus & 1,9612 & 1,96006 & 1,95654 & 1,9499  & 1,93863 & 1,9197  & 1,88671 & 1,8252  & 1,70099 & 1,44172 \\ \hline
+B 100        & 2,283  & 2,2821  & 2,27934 & 2,2741  & 2,26514 & 2,24984 & 2,22245 & 2,16896 & 2,05093 & 1,76068 \\ \hline
+B 1000       & 1,9639 & 1,96279 & 1,95928 & 1,95265 & 1,94141 & 1,92252 & 1,88958 & 1,82814 & 1,70396 & 1,44435 \\ \hline
+\end{tabular}
+\newline \newline
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+ 5,5      & 6        & 6,5      & 7        & 7,5       & 8         & 8,5       & 9         & 9,5       & 10        \\ \hline
+ 0,548282 & 0,288786 & 0,16419  & 0,102119 & 0,0683386 & 0,0483712 & 0,0357438 & 0,0273162 & 0,0214433 & 0,0172045 \\ \hline
+0,544385 & 0,253972 & 0,135641 & 0,08172  & 0,0537379 & 0,0376409 & 0,0276294 & 0,0210199 & 0,0164482 & 0,0131661  \\ \hline
+ 0,548311 & 0,288482 & 0,163915 & 0,101913 & 0,0681881 & 0,0482591 & 0,0356583 & 0,0272495 & 0,0213901 & 0,0171614 \\ \hline
+\end{tabular}
+
+\subsubsection{Analitikus eredmény}
+\begin{center}
+\includegraphics[scale=0.7]{analitikus.png}
+\end{center}
+Függőleges tengelyen a $B$ van, vízszintes tengelyen a $z$.
+
+\subsubsection{Program által számolt}
+100 egyenes vonal esetén ($dl$)
+
+\includegraphics[scale=0.4]{B100_N20.png} $\Rightarrow$
+\includegraphics[scale=0.7]{B100_N20graf.png} \\
+Függőleges tengelyen a $B$ van, vízszintes tengelyen a $z$.
+\newline \newline
+Látszik, hogy az indukció nagysága eléggé eltér az analitikusan számolt értékektől a kirajzolt tekercs is "szögletes".
+\newline \newline \newline \newline
+1000 egyenes vonal esetén ($dl$)
+\begin{center}
+\includegraphics[scale=0.4]{B1000_N20.png} $\Rightarrow$
+\includegraphics[scale=0.7]{B1000_N20graf.png}
+\end{center}
+Függőleges tengelyen a $B$ van, vízszintes tengelyen a $z$.
+\newline \newline
+A program által számolt értékek miatt alig látszanak az analitikusan számolt értékek.
+
+\subsection*{Másik szolenoid tere}
+Tekercs menetszáma: $N = 100$ \\
+Tekercs hossza: $10.0 \, m$ \\
+Tekercs sugara: $0.5 \, m$ \\
+Áramerősség: $1 \, A$
+
+\subsubsection{Program által számolt}
+1000 $dl$ darabra összegezve.
+\begin{center}
+\includegraphics[scale=0.7]{N100.png}
+\end{center}
+Függőleges tengelyen a $B$ van, vízszintes tengelyen a $z$. \newline  \newline
+Az adatok az excel fájlban (N100.xlsx) láthatók. \\
+Jól látszik, hogy az indukció nagysága nagyon lecsökken a tekercsen kívül. A tekercs szélén pedig pont a fele a maximális értéknek, mint ahogy az az analitikus képletből is kijön $R \ll l$ esetén. \\
+$\displaystyle B(0) =  -\frac{\mu_0 N I }{2l} \left( \frac{-\frac{l}{2}}{\sqrt{R^2 + (\frac{l}{2})^2}} - \frac{\frac{l}{2}}{\sqrt{R^2 + (\frac{l}{2})^2}} \right) = \frac{\mu_0 N I }{2\sqrt{R^2 + (\frac{l}{2})^2}} = \frac{\mu_0 N I }{4\sqrt{2R^2 + l^2}} $ \\
+$\displaystyle B(\frac{l}{2}) =  -\frac{\mu_0 N I }{2l} \left( 0 - \frac{l}{\sqrt{R^2 + l^2}} \right) = \frac{\mu_0 N I }{2\sqrt{R^2 + l^2}} $
+
+\end{document}
